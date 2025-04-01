@@ -1,13 +1,16 @@
-from supabase import create_client, Client
-import pandas as pd
-import streamlit as st
+import os
+from supabase import create_client
 
-# URL e chave do Supabase
-SUPABASE_URL = "https://skttsevdyxjkscfpqfmh.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrdHRzZXZkeXhqa3NjZnBxZm1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM0NTY3NzYsImV4cCI6MjA1OTAzMjc3Nn0.z_jL9clPWRAx0dv2Icev4ttrjog9NcseEJiNC6sy-Ag"
+# Obter as variáveis de ambiente
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-# Criar cliente Supabase
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+# Verificar se as variáveis estão configuradas
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("As variáveis de ambiente SUPABASE_URL e SUPABASE_KEY não estão configuradas.")
+
+# Criar o cliente do Supabase
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 st.cache_data
 def carregar_chamados():
