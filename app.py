@@ -4,13 +4,10 @@ import pandas as pd
 from services.supabase import supabase
 import time
 
-if "STREAMLIT_SERVER_PORT" not in os.environ:
-    port = int(os.environ.get("PORT", 8501))
-    st.set_option('server.port', port)
 # Ler a variável de ambiente PORT
-#port = int(os.environ.get("PORT", 8501))
+port = int(os.environ.get("PORT", 8501))
 # Configurar o Streamlit para usar a porta
-#st.set_option('server.port', port)
+st.set_option('server.port', port)
 # Configuração da página
 st.set_page_config(
     layout="wide",
