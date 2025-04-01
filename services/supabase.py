@@ -1,5 +1,7 @@
 import os
-from supabase import create_client
+from supabase import create_client, Client
+import pandas as pd
+import streamlit as st
 
 # Obter as variáveis de ambiente
 SUPABASE_URL = os.getenv("SUPABASE_URL")
@@ -9,10 +11,10 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise ValueError("As variáveis de ambiente SUPABASE_URL e SUPABASE_KEY não estão configuradas.")
 
-# Criar o cliente do Supabase
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+# Criar cliente Supabase
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-st.cache_data
+@st.cache_data
 def carregar_chamados():
     """Função para carregar os chamados do banco de dados"""
     try:
@@ -34,5 +36,3 @@ def carregar_chamados():
     except Exception as e:
         st.error(f"Erro ao carregar os chamados: {e}")
         return pd.DataFrame()
-
-
