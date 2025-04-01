@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from services.supabase import supabase
 import time
-
+import plotly.express as px
 
 # Ler a variável de ambiente PORT
 port = int(os.environ.get("PORT", 8501))
