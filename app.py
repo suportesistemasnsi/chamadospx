@@ -2,15 +2,10 @@ import streamlit as st
 import pandas as pd
 from services.supabase import supabase
 import time
-import plotly.express as px
+
 
 # Ler a variável de ambiente PORT
 port = int(os.environ.get("PORT", 8501))
-try:
-    port = int(port)
-except ValueError:
-    port = 8501
-
 # Configurar o Streamlit para usar a porta
 st.set_option('server.port', port)
 # Configuração da página
