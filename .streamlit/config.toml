@@ -2,7 +2,5 @@
 headless = true
 port = $PORT
 enableCORS = false
-
-[server.mount]
-path = "/install.sh"
-mount_path = "/install.sh"
+[browser]
+serverAddress = "0.0.0.0"
