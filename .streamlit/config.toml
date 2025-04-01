@@ -1,6 +1,4 @@
 [server]
 headless = true
-port = $PORT
+port = 8501  # Porta padrão, será sobrescrita pelo código Python
 enableCORS = false
-[browser]
-serverAddress = "0.0.0.0"
