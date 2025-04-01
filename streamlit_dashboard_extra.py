@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from services.supabase import carregar_chamados
+from plotly.subplots import make_subplots
+import plotly.io as pio
 
 def dashboard():
     st.title("📊 Dashboard de Chamados")
