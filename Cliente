@@ -1,1 +1,11 @@
-
+class Cliente:
+    def __init__(self, id, chsh, chpx, titulo, data, pend, usr, status, obs):
+        self.id = id
+        self.chsh = chsh
+        self.chpx = chpx
+        self.titulo = titulo
+        self.data = data
+        self.pend = pend
+        self.usr = usr
+        self.status = status
+        self.obs = obs  # Argumento obrigatório
