@@ -1,8 +1,10 @@
 import os
+from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
 from services.supabase import supabase
 import time
+
 
 # Ler a variável de ambiente PORT
 port = int(os.environ.get("PORT", 8501))
@@ -15,9 +17,13 @@ st.set_page_config(
     page_icon="📊",
     initial_sidebar_state="expanded",
 )
+# Carregar variáveis de ambiente do arquivo .env
+load_dotenv()
+cookie_password = os.getenv("COOKIE_PASSWORD")
+
 # Configuração do gerenciador de cookies
 cookies = EncryptedCookieManager(
-    password="sua_senha_secreta_aqui",  # Substitua por uma senha segura
+    password=cookie_password,  # Usar a senha do .env
 )
 if not cookies.ready():
     st.stop()
