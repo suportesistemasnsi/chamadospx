@@ -369,29 +369,43 @@ def exibir_contadores(df, df_completo):
     .metric-container {
         display: flex;
         justify-content: space-around;
-        margin: 20px 0;
+        margin: 25px 0;
+        gap: 20px;
     }
+    
     .metric-box {
-        background-color: #1e1e1e;
-        padding: 20px;
-        border-radius: 10px;
+        background: rgba(26, 43, 60, 0.8);
+        backdrop-filter: blur(5px);
+        padding: 25px;
+        border-radius: 12px;
         text-align: center;
-        width: 250px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-        border: 2px solid #004aad;
+        width: 100%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 1px solid rgba(109, 213, 237, 0.3);
+        transition: all 0.3s ease;
     }
+    
+    .metric-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        border: 1px solid rgba(109, 213, 237, 0.6);
+    }
+    
     .metric-label {
-        font-size: 18px;
-        font-weight: bold;
-        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #a3c4d8;
+        margin-bottom: 10px;
     }
+    
     .metric-value {
-        font-size: 24px;
-        color: #004aad;
-        font-weight: bold;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     </style>
-    """, unsafe_allow_html=True)
 
     st.markdown(f"""
     <div class='metric-container'>
