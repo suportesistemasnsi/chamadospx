@@ -15,15 +15,25 @@ st.set_page_config(
     page_icon="📊",
     initial_sidebar_state="expanded",
 )
- #Função para autenticar o usuário
+# Configuração do gerenciador de cookies
+cookies = EncryptedCookieManager(
+    password="sua_senha_secreta_aqui",  # Substitua por uma senha segura
+)
+if not cookies.ready():
+    st.stop()
+
+# Função para autenticar o usuário
 def autenticar_usuario(email, senha):
     try:
-        # Tentar autenticar o usuário no Supabase
         response = supabase.auth.sign_in_with_password({"email": email, "password": senha})
-        if response.user:  # Verificar se o usuário foi autenticado
-            return response.user, None  # Retorna o usuário autenticado
-        elif response.error:  # Verificar se houve um erro
-            return None, response.error.message  # Retorna a mensagem de erro
+        if response.user:
+            # Salvar access_token e refresh_token no cookie
+            cookies["access_token"] = response.session.access_token
+            cookies["refresh_token"] = response.session.refresh_token
+            cookies.save()
+            return response.user, None
+        elif response.error:
+            return None, response.error.message
         else:
             return None, "Erro desconhecido ao autenticar."
     except Exception as e:
@@ -52,40 +62,56 @@ def tela_login():
     with st.container():
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
-            with st.container():
-                st.title("🔒 Login")
-                # st.markdown("<div class='login-box'>", unsafe_allow_html=True)
-                email = st.text_input("E-mail")
-                senha = st.text_input("Senha", type="password")
-                header_col, form_col = st.columns([1, 2])
-                
-                if st.button("Entrar", key="login_btn"):
-                    if email and senha:
-                        usuario, erro = autenticar_usuario(email, senha)
-                        if usuario:
-                            st.session_state["usuario"] = usuario
-                            st.success("Login realizado com sucesso!")
-                            time.sleep(1)
-                            st.rerun()
-                        else:
-                            st.error(erro or "Erro ao autenticar")
+            st.title("🔒 Login")
+            email = st.text_input("E-mail")
+            senha = st.text_input("Senha", type="password")
+            
+            if st.button("Entrar", key="login_btn"):
+                if email and senha:
+                    usuario, erro = autenticar_usuario(email, senha)
+                    if usuario:
+                        st.session_state["usuario"] = usuario
+                        st.success("Login realizado com sucesso!")
+                        time.sleep(1)
+                        st.rerun()
                     else:
-                        st.warning("Preencha todos os campos")
-                st.markdown("</div>", unsafe_allow_html=True)
+                        st.error(erro or "Erro ao autenticar")
+                else:
+                    st.warning("Preencha todos os campos")
 
-# Função principal
+# Função principal de verificação de autenticação
 def verificar_autenticacao():
     if "usuario" not in st.session_state:
         st.session_state["usuario"] = None
     
+    # Verificar se há tokens no cookie
+    access_token = cookies.get("access_token")
+    refresh_token = cookies.get("refresh_token")
+    
+    if access_token and refresh_token and st.session_state["usuario"] is None:
+        try:
+            # Restaurar a sessão do Supabase com ambos os tokens
+            response = supabase.auth.set_session(access_token, refresh_token)
+            if response.user:
+                st.session_state["usuario"] = response.user
+        except Exception as e:
+            st.error(f"Erro ao restaurar sessão: {str(e)}")
+            cookies.pop("access_token", None)
+            cookies.pop("refresh_token", None)
+            cookies.save()
+    
     if st.session_state["usuario"] is None:
         tela_login()
-        st.stop()  # Impede a execução do restante do código
+        st.stop()
     else:
-        # Botão de logout na sidebar
-        st.sidebar.button("Sair", on_click=lambda: st.session_state.update({"usuario": None}))
-
-
+        def logout():
+            st.session_state["usuario"] = None
+            cookies.pop("access_token", None)
+            cookies.pop("refresh_token", None)
+            cookies.save()
+            st.rerun()
+        
+        st.sidebar.button("Sair", on_click=logout)
 
 # Adicionar o CSS personalizado para o tema escuro
 st.markdown("""
