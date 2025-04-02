@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 import plotly.io as pio
 
 def dashboard():
-    st.title("📊 Dashboard de Chamados")
+    st.title("Dashboard de Chamados")
 
     # Carregar os dados reais
     df = carregar_chamados()
