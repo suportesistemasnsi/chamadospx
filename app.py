@@ -18,6 +18,23 @@ st.set_page_config(
     page_icon="📊",
     initial_sidebar_state="expanded",
 )
+# Remove o menu hambúrguer e configurações
+st.markdown("""
+    <style>
+        /* Esconde o menu padrão do Streamlit */
+        #MainMenu {visibility: hidden;}
+        
+        /* Esconde o botão de hambúrguer (menu) */
+        header .st-emotion-cache-iiif1v {visibility: hidden;}
+        
+        /* Remove o espaço vazio deixado pelo menu */
+        header .st-emotion-cache-h5rgaw {visibility: hidden;}
+        
+        /* Esconde o rodapé "Made with Streamlit" */
+        footer {visibility: hidden;}
+    </style>
+""", unsafe_allow_html=True)
+
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
 cookie_password = os.getenv("COOKIE_PASSWORD")
