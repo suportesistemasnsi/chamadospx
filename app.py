@@ -444,7 +444,7 @@ def main():
         st.sidebar.header("Filtros e Pesquisa", divider="blue")
         selected_status = st.sidebar.selectbox("Filtrar por Status", ["Todos", "Aberto", "Concluído"],index=1) # Define "Aberto" como o valor padrão 
         selected_pendencia = st.sidebar.selectbox("Filtrar por Pendência", ["Todos", "Pixeon", "SH"])
-        search_term = st.sidebar.text_input("Pesquisar por Número ou Título")
+        search_term = st.sidebar.text_input("Pesquisar por Número, Título ou Responsável", placeholder="Digite o termo de pesquisa")
         
         # Aplicar filtros (cria uma cópia filtrada)
         df_filtrado = df_completo.copy()
