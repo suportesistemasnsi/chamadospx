@@ -17,6 +17,7 @@ st.set_page_config(
     page_title="Gestão de Chamados",
     page_icon="📊",
     initial_sidebar_state="expanded",
+    menu_items={},
 )
 # Remove o menu hambúrguer e configurações
 st.markdown("""
