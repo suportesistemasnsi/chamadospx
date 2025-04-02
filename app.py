@@ -345,7 +345,7 @@ def main():
 
     # Verificar autenticação antes de exibir o conteúdo
     verificar_autenticacao()
-    st.sidebar.header("Navegação")
+    st.sidebar.header("Navegação", divider="blue")
     pagina = st.sidebar.radio("Escolha uma página:", ["Principal", "Dashboard"])
     
     if pagina == "Principal":
@@ -353,7 +353,7 @@ def main():
         df_completo = carregar_chamados()
         
         # Filtros na sidebar
-        st.sidebar.header("Filtros e Pesquisa")
+        st.sidebar.header("Filtros e Pesquisa", divider="blue")
         selected_status = st.sidebar.selectbox("Filtrar por Status", ["Todos", "Aberto", "Concluído"],index=1) # Define "Aberto" como o valor padrão 
         selected_pendencia = st.sidebar.selectbox("Filtrar por Pendência", ["Todos", "Pixeon", "SH"])
         search_term = st.sidebar.text_input("Pesquisar por Número ou Título")
@@ -374,7 +374,7 @@ def main():
             ]
 
         # Exibir contadores (passando ambos os DataFrames)
-        st.header("Resumo dos Chamados")
+        st.header("Resumo dos Chamados",divider="blue")
         exibir_contadores(df_filtrado, df_completo)
 
         # FORMULÁRIO DE INSERÇÃO DE NOVOS CHAMADOS (ADICIONADO AQUI)
