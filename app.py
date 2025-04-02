@@ -141,107 +141,155 @@ def verificar_autenticacao():
 # Adicionar o CSS personalizado para o tema escuro
 st.markdown("""
     <style>
-        /* Fundo da página */
+        /* Fundo da página - Gradiente sutil */
         .main {
-            background-color: #121212;
-            color: #ffffff;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #f0f2f6;
         }
 
-        /* Fundo da barra lateral */
+        /* Fundo da barra lateral - Tons mais suaves */
         .sidebar .sidebar-content {
-            background-color: #1e1e1e;
+            background-color: #1a2b3c;
+            border-right: 1px solid #2d4a5e;
         }
 
-        /* Títulos */
+        /* Títulos - Gradiente de texto */
         h1, h2, h3, h4, h5, h6 {
-            color: #ffffff;
+            color: #f0f2f6;
+            background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* Texto */
+        /* Texto principal */
         p, label, span {
-            color: #ffffff;
+            color: #d1e0eb;
         }
 
-        /* Botões */
+        /* Botões - Efeito moderno */
         .stButton>button {
-            background-color: #004aad;
-            color: #ffffff;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .stButton>button:hover {
-            background-color: #005eff;
-            color: #ffffff;
+            background: linear-gradient(135deg, #3a56a8 0%, #121f3d 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
 
-        /* Caixa de entrada */
+        /* Campos de entrada - Glassmorphism */
         .stTextInput, .stNumberInput, .stSelectbox, .stDateInput {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border: 1px solid #333333;
+            background: rgba(26, 43, 60, 0.7) !important;
+            backdrop-filter: blur(5px);
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            border-radius: 8px !important;
+            padding: 10px !important;
         }
 
-        /* Tabela */
+        /* Tabelas - Design moderno */
         .stDataFrame {
-            background-color: #1e1e1e;
-            color: #ffffff;
+            background: rgba(26, 43, 60, 0.8) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
         }
 
-        /* Estilo do título */
+        /* Título principal - Destaque */
         .main-title {
             text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: #ffffff;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #333333;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            border: none;
         }
 
-        /* Contadores */
+        /* Contadores - Cards modernos */
         .metric-container {
             display: flex;
             justify-content: space-around;
-            margin: 20px 0;
+            margin: 25px 0;
+            gap: 20px;
         }
+        
         .metric-box {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
+            background: rgba(26, 43, 60, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 25px;
+            border-radius: 12px;
             text-align: center;
-            width: 250px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            border: 2px solid #333333;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
         }
+        
+        .metric-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
         .metric-label {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #a3c4d8;
+            margin-bottom: 10px;
         }
+        
         .metric-value {
-            font-size: 24px;
-            color: #00ff00;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(26, 43, 60, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#6dd5ed, #2193b0);
+            border-radius: 10px;
         }
     </style>
 """, unsafe_allow_html=True)
-# Estilo do título
+
+# Título com ícone moderno
 st.markdown("""
     <style>
         .main-title { 
             text-align: center; 
-            font-size: 36px; 
-            font-weight: bold; 
-            color: #004aad; 
-            padding: 15px; 
-            border-radius: 10px; 
-            background-color: #333333; 
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            border: none;
         }
         .sidebar .sidebar-content { 
-            background-color: #f8f9fa; 
+            background: #1a2b3c;
+            border-right: 1px solid #2d4a5e;
         }
     </style>
     <div class='main-title'>🖥️ Gestão de Chamados SH/Pixeon</div>
