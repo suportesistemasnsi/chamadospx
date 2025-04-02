@@ -244,7 +244,7 @@ st.markdown("""
             background-color: #f8f9fa; 
         }
     </style>
-    <div class='main-title'>📊 Gestão de Chamados SH/Pixeon</div>
+    <div class='main-title'>🖥️ Gestão de Chamados SH/Pixeon</div>
 """, unsafe_allow_html=True)
 
 @st.cache_data
