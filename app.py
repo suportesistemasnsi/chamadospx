@@ -1,17 +1,5 @@
-import os
-from dotenv import load_dotenv
 import streamlit as st
-import pandas as pd
-from services.supabase import supabase
-import time
-from streamlit_cookies_manager import EncryptedCookieManager
 
-
-# Ler a variável de ambiente PORT
-port = int(os.environ.get("PORT", 8501))
-# Configurar o Streamlit para usar a porta
-#st.set_option('server.port', port)
-# Configuração da página
 st.set_page_config(
     layout="wide",
     page_title="Gestão de Chamados",
@@ -19,6 +7,20 @@ st.set_page_config(
     initial_sidebar_state="expanded",
     menu_items={}
 )
+
+import os
+from dotenv import load_dotenv
+import pandas as pd
+from services.supabase import supabase
+import time
+from streamlit_cookies_manager import EncryptedCookieManager
+
+# Ler a variável de ambiente PORT
+port = int(os.environ.get("PORT", 8501))
+# Configurar o Streamlit para usar a porta
+#st.set_option('server.port', port)
+# Configuração da página
+
 # Remove o menu hambúrguer e configurações
 st.markdown("""
     <style>
@@ -293,6 +295,29 @@ st.markdown("""
         }
     </style>
     <div class='main-title'>🖥️ Gestão de Chamados SH/Pixeon</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <style>
+        /* Estilo para o botão de submit do formulário */
+        .stFormSubmitButton button {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 10px 24px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+        }
+        
+        .stFormSubmitButton button:hover {
+            background: linear-gradient(135deg, #3a56a8 0%, #121f3d 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15) !important;
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 @st.cache_data
