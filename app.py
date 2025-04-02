@@ -70,18 +70,46 @@ def autenticar_usuario(email, senha):
 def tela_login():
     st.markdown("""
     <style>
+        /* Container principal */
         .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 80vh;
         }
+        
+        /* Box do login */
         .login-box {
-            background-color: #1e1e1e;
-            padding: 2rem;
-            border-radius: 10px;
+            background: rgba(26, 43, 60, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 15px;
             width: 400px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(109, 213, 237, 0.2);
+        }
+        
+        /* Título com ícone - Estilo específico */
+        .login-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #f0f2f6 !important;
+        }
+        
+        /* Ícone específico - sem gradiente */
+        .login-title .icon {
+            color: #6dd5ed !important;
+            background: none !important;
+            -webkit-text-fill-color: initial !important;
+        }
+        
+        /* Inputs */
+        .stTextInput input, .stTextInput input:focus,
+        .stTextInput input:hover {
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            border-radius: 8px !important;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -89,7 +117,9 @@ def tela_login():
     with st.container():
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
-            st.title("🔒 Login")
+            # Título modificado
+            st.markdown('<h1 class="login-title"><span class="icon">🔒</span> Login</h1>', unsafe_allow_html=True)
+            
             email = st.text_input("E-mail")
             senha = st.text_input("Senha", type="password")
             
