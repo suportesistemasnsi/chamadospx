@@ -406,6 +406,7 @@ def exibir_contadores(df, df_completo):
         -webkit-text-fill-color: transparent;
     }
     </style>
+""", unsafe_allow_html=True)
 
     st.markdown(f"""
     <div class='metric-container'>
