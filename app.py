@@ -353,7 +353,7 @@ st.markdown("""
 @st.cache_data
 def carregar_chamados():
     try:
-        response = supabase.table("Chamados").select("*").order("data_abertura", desc=False).order("id", desc=False).execute()
+        response = supabase.table("Chamados").select("id, chamados_sh, chamados_px, titulo, data_abertura, pendencia_retorno, usuario_resp, status, observacao").order("data_abertura", desc=False).order("id", desc=False).execute()
         if response.data:
             df = pd.DataFrame(response.data)
             df.rename(columns={
