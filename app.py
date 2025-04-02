@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 from services.supabase import supabase
 import time
+from streamlit_cookies_manager import EncryptedCookieManager
 
 
 # Ler a variável de ambiente PORT
