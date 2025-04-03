@@ -562,7 +562,7 @@ def main():
                 "Nº": st.column_config.NumberColumn("Nº", disabled=True),  # Contador visível, não editável
                 "Chamados SH": st.column_config.NumberColumn("Chamado SH", format="%d"),
                 "Chamados Pixeon": st.column_config.TextColumn("Chamado Pixeon", width="medium"),
-                "Título": st.column_config.TextColumn("Título", width="large"),
+                "Título": st.column_config.TextColumn("Título", width="None"),
                 "Data": st.column_config.DateColumn("Data", format="DD-MM-YYYY"),
                 "Pendência": st.column_config.SelectboxColumn("Pendência", options=["Pixeon", "SH"]),
                 "Usuário Resp": st.column_config.TextColumn("Responsável"),
