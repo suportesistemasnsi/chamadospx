@@ -116,7 +116,7 @@ def dashboard():
 
         with tab2:
             fig = create_bar_chart(usuario_counts, 'Usuário', 'count', 
-                                 "Chamados por Usuário (Ordenados)", 
+                                 "Chamados por Usuário", 
                                  horizontal=True)
             fig.update_layout(
                 yaxis_title=None,
