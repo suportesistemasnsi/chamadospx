@@ -489,8 +489,9 @@ def main():
             df_filtrado = df_filtrado[
                 df_filtrado["Chamados SH"].astype(str).str.lower().str.contains(search_term) |
                 df_filtrado["Chamados Pixeon"].astype(str).str.lower().str.contains(search_term) |
-                df_filtrado["Título"].str.lower().str.contains(search_term)
-                | df_filtrado["Usuário Resp"].str.lower().str.contains(search_term)
+                df_filtrado["Título"].str.lower().str.contains(search_term) |
+                df_filtrado["Usuário Resp"].str.lower().str.contains(search_term) |
+                df_filtrado["Observação"].str.lower().str.contains(search_term)
             ]
 
         # Exibir contadores (passando ambos os DataFrames)
