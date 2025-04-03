@@ -393,6 +393,8 @@ def exibir_contadores(df, df_completo):
     # Contador de concluídos sempre mostra o total, independente dos filtros
     total_concluidos = df_completo[df_completo["Status"] == "Concluído"].shape[0]
     total_abertos = df_completo[df_completo["Status"] == "Aberto"].shape[0]
+    total_pend_px = df_completo[df_completo["Pendência"] == "Pixeon"].shape[0]
+    total_pend_sh = df_completo[df_completo["Pendência"] == "SH"].shape[0]
 
     st.markdown("""
     <style>
