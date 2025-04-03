@@ -6,66 +6,72 @@ from services.supabase import carregar_chamados
 from plotly.subplots import make_subplots
 import plotly.io as pio
 
-# Função para carregar dados com cache
-@st.cache_data(ttl=300)  # Cache por 5 minutos
+# Configuração de cache
+@st.cache_data(ttl=300)
 def carregar_dados_dashboard():
     return carregar_chamados()
 
-# Função para criar gráfico de pizza
+# Funções para gráficos
 @st.cache_data
 def create_pie_chart(data, values_col, names_col, title=""):
     return px.pie(data, 
                 values=values_col, 
                 names=names_col,
                 title=title,
-                template='plotly_dark')
+                template='plotly_dark',
+                hole=0.3,  # Donut chart
+                color_discrete_sequence=px.colors.sequential.Blues_r)
 
-# Função para criar gráfico de barras
 @st.cache_data
-def create_bar_chart(data, x_col, y_col, title="", color_col=None):
-    fig = px.bar(data, 
-                x=x_col, 
-                y=y_col,
-                title=title,
-                text_auto=True,
-                template='plotly_dark')
-    if color_col:
-        fig.update_traces(marker_color=px.colors.qualitative.Plotly)
+def create_bar_chart(data, x_col, y_col, title="", color_col=None,  horizontal=False):
+    if horizontal:
+        fig = px.bar(data,
+                    y=x_col,
+                    x=y_col,
+                    title=title,
+                    text_auto=True,
+                    template='plotly_dark',
+                    orientation='h',
+                    color=y_col,
+                    color_continuous_scale=px.colors.sequential.Blues_r)
+    else:
+        fig = px.bar(data,
+                    x=x_col,
+                    y=y_col,
+                    title=title,
+                    text_auto=True,
+                    template='plotly_dark',
+                    color=y_col,
+                    color_continuous_scale=px.colors.sequential.Blues_r)
     return fig
 
 def dashboard():
-    # CSS customizado modificado
+    # CSS customizado
     st.markdown("""
     <style>
-        /* Estilo para o container do título */
         .dashboard-header {
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        
-        /* Estilo apenas para o texto do título */
         .dashboard-title {
             color: #f0f2f6;
             font-size: 2.2rem;
             display: inline;
             vertical-align: middle;
         }
-        
-        /* Estilo específico para o ícone - sem efeitos de cor */
         .dashboard-icon {
             font-size: 2.2rem;
             display: inline;
             vertical-align: middle;
             margin-right: 10px;
-            color: inherit !important;
-            background: none !important;
-            -webkit-text-fill-color: initial !important;
-            text-shadow: none !important;
+        }
+        .stPlotlyChart {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
     </style>
     """, unsafe_allow_html=True)
 
-    # Título modificado com classes separadas
     st.markdown("""
     <div class="dashboard-header">
         <span class="dashboard-icon">📊</span>
@@ -73,10 +79,7 @@ def dashboard():
     </div>
     """, unsafe_allow_html=True)
 
-    # Restante do código do dashboard permanece igual
-    [...]
-
-    # Carregar dados com feedback visual
+    # Carregamento de dados
     with st.spinner('Carregando dados...'):
         df = carregar_dados_dashboard()
         
@@ -84,13 +87,7 @@ def dashboard():
             st.warning("Nenhum dado disponível para exibir no dashboard.")
             return
 
-        # Verificar colunas necessárias
-        required_columns = {'Status', 'Pendência', 'Usuário Resp'}
-        if not required_columns.issubset(df.columns):
-            st.error("Estrutura de dados inválida. Faltam colunas necessárias.")
-            st.stop()
-
-        # Preparar dados
+        # Processamento de dados
         status_counts = df['Status'].value_counts().reset_index()
         status_counts.columns = ['Status', 'count']
         
@@ -99,6 +96,7 @@ def dashboard():
         
         usuario_counts = df['Usuário Resp'].value_counts().reset_index()
         usuario_counts.columns = ['Usuário', 'count']
+        usuario_counts = usuario_counts.sort_values('count', ascending=True)  # Ordenação
 
         # Layout com abas
         tab1, tab2 = st.tabs(["Visão Geral", "Detalhes"])
@@ -117,10 +115,21 @@ def dashboard():
                 )
 
         with tab2:
-            st.plotly_chart(
-                create_bar_chart(usuario_counts, 'Usuário', 'count', "Chamados por Usuário", "Usuário"),
-                use_container_width=True
+            fig = create_bar_chart(usuario_counts, 'Usuário', 'count', 
+                                 "Chamados por Usuário (Ordenados)", 
+                                 horizontal=True)
+            fig.update_layout(
+                yaxis_title=None,
+                xaxis_title="Número de Chamados",
+                showlegend=False,
+                margin=dict(l=100, r=20, t=40, b=20),
+                coloraxis_showscale=False
             )
+            fig.update_traces(
+                textposition='outside' if len(usuario_counts) < 15 else 'inside',
+                marker_line_color='rgba(0,0,0,0.3)'
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     dashboard()
