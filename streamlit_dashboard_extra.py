@@ -33,7 +33,7 @@ def create_bar_chart(data, x_col, y_col, title="", color_col=None,  horizontal=F
                     template='plotly_dark',
                     orientation='h',
                     color=y_col,
-                    color_continuous_scale=px.colors.sequential.Blues_r)
+                    color_continuous_scale=px.colors.sequential.Blues)
     else:
         fig = px.bar(data,
                     x=x_col,
@@ -42,7 +42,7 @@ def create_bar_chart(data, x_col, y_col, title="", color_col=None,  horizontal=F
                     text_auto=True,
                     template='plotly_dark',
                     color=y_col,
-                    color_continuous_scale=px.colors.sequential.Blues_r)
+                    color_continuous_scale=px.colors.sequential.Blues)
     return fig
 
 def dashboard():
