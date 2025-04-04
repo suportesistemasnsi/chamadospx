@@ -58,6 +58,7 @@ def dashboard():
             font-size: 2.2rem;
             display: inline;
             vertical-align: middle;
+            font-weight: bold;
         }
         .dashboard-icon {
             font-size: 2.2rem;
