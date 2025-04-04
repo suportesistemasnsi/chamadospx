@@ -151,6 +151,10 @@ def verificar_autenticacao():
             response = supabase.auth.set_session(access_token, refresh_token)
             if response.user:
                 st.session_state["usuario"] = response.user
+                 # Atualizar os tokens no cookie
+                cookies["access_token"] = response.session.access_token
+                cookies["refresh_token"] = response.session.refresh_token
+                cookies.save()
         except Exception as e:
             st.error(f"Erro ao restaurar sessão: {str(e)}")
             cookies.pop("access_token", None)
@@ -537,8 +541,8 @@ def main():
                             if response.data:
                                 st.success("Chamado cadastrado com sucesso!")
                                 st.cache_data.clear()
-                                time.sleep(1)
-                                st.rerun()
+                                #time.sleep(1)
+                                #st.rerun()
                             else:
                                 st.error("Erro ao cadastrar chamado. Verifique os dados.")
                         except Exception as e:
