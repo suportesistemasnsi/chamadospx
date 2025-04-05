@@ -112,11 +112,11 @@ def pagina_facil():
         with st.form(key="add_chamado_fc", clear_on_submit=True):
             col1, col2, col3 = st.columns(3)
             with col1:
-                chamado_sh = st.text_input("Chamado Nordeste", value=None,placeholder="Nº do chamado Service Desk")
+                chamado_sh = st.text_input("Chamado Nordeste", value=None, placeholder="Nº do chamado Service Desk")
                 titulo = st.text_input("Título*", placeholder="Descrição do chamado")
                 data_abertura = st.date_input("Data de Abertura*")
             with col2:
-                chamado_fc = st.text_input("Chamado Fácil", value="",placeholder="Nº do chamado Fácil")
+                chamado_fc = st.text_input("Chamado Fácil", value="", placeholder="Nº do chamado Fácil")
                 pendencia = st.selectbox("Pendência*", ["Fácil", "Nordeste"])
             with col3:
                 usuario_resp = st.text_input("Usuário Responsável*", placeholder="Nome do reponsável")
