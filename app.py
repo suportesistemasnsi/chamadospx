@@ -499,7 +499,7 @@ def main():
             ]
 
         # Exibir contadores (passando ambos os DataFrames)
-        st.header("Resumo dos Chamados",divider="blue")
+        st.header("Resumo dos Chamados Pixeon",divider="blue")
         exibir_contadores(df_filtrado, df_completo)
 
         # FORMULÁRIO DE INSERÇÃO DE NOVOS CHAMADOS (ADICIONADO AQUI)
