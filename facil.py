@@ -105,7 +105,7 @@ def pagina_facil():
             except Exception as e:
                 st.error(f"Erro ao aplicar filtro de pesquisa: {str(e)}")
 
-    st.header("Resumo dos Chamados", divider="blue")
+    st.header("Resumo dos Chamados Fácil", divider="blue")
     exibir_contadores(df_filtrado_fc, df_completo_fc)
 
     with st.expander("➕ Inserir Novo Chamado", expanded=False):
