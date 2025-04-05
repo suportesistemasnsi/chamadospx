@@ -113,7 +113,7 @@ def pagina_facil():
             col1, col2, col3 = st.columns(3)
             with col1:
                 chamado_sh = st.text_input("Chamado Nordeste", value=None, placeholder="Nº do chamado Service Desk")
-                titulo = st.text_input("Título*", placeholder="Descrição do chamado")
+                titulo = st.text_input("Título*", placeholder="Digite o Título")
                 data_abertura = st.date_input("Data de Abertura*")
             with col2:
                 chamado_fc = st.text_input("Chamado Fácil", value="", placeholder="Nº do chamado Fácil")
