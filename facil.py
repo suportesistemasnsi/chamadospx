@@ -112,7 +112,7 @@ def pagina_facil():
         with st.form(key="add_chamado_fc", clear_on_submit=True):
             col1, col2, col3 = st.columns(3)
             with col1:
-                chamado_sh = st.number_input("Chamado SH", min_value=0, step=1)
+                chamado_sh = st.number_input("Chamado Nordeste", min_value=0, step=1)
                 titulo = st.text_input("Título*", placeholder="Descrição do chamado")
                 data_abertura = st.date_input("Data de Abertura*")
             with col2:
