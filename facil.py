@@ -73,6 +73,7 @@ def exibir_contadores(df, df_completo_fc):
     """, unsafe_allow_html=True)
 
 def pagina_facil():
+    st.write("Página Chamados Fácil carregada com sucesso!")
     df_completo_fc = carregar_chamados_fc()
     if df_completo_fc.empty:
         st.warning("Nenhum dado foi carregado da tabela Chamados_fc. Você pode adicionar novos chamados abaixo.")
