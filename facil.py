@@ -1,7 +1,10 @@
 import streamlit as st
+import os
+from dotenv import load_dotenv
 import pandas as pd
-import time
 from services.supabase import supabase
+import time
+from streamlit_cookies_manager import EncryptedCookieManager
 
 @st.cache_data(ttl=300)
 def carregar_chamados_fc():
