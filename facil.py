@@ -159,7 +159,7 @@ def pagina_facil():
 
         column_config = {
             "Nº": st.column_config.NumberColumn("Nº", width=None, disabled=True),
-            "Chamados SH": st.column_config.NumberColumn("Chamado SH", format="%d", width=None),
+            "Chamados SH": st.column_config.NumberColumn("Chamado Nde", format="%d", width=None),
             "Chamados Fácil": st.column_config.TextColumn("Chamado Fácil", width=None),
             "Título": st.column_config.TextColumn("Título", width="large"),
             "Data": st.column_config.DateColumn("Data", format="DD-MM-YYYY"),
