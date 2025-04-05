@@ -328,7 +328,7 @@ st.markdown("""
             border-right: 1px solid #2d4a5e;
         }
     </style>
-    <div class='main-title'>🖥️ Gestão de Chamados SH/Pixeon</div>
+    <div class='main-title'>🖥️ Gestão de Chamados Pixeon / Fácil</div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
