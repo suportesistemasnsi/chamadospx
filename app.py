@@ -641,7 +641,7 @@ def main():
         else:
             st.warning("Nenhum chamado encontrado com os filtros atuais.")
     elif pagina == "Chamados Fácil":
-    pagina_facil()
+        pagina_facil()
     
     elif pagina == "Dashboard":
         from streamlit_dashboard_extra import dashboard
