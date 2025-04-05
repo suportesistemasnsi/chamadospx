@@ -472,7 +472,7 @@ def main():
     st.sidebar.header("Navegação", divider="blue")
     pagina = st.sidebar.radio("Escolha uma página:", ["Chamados Pixeon","Chamados Fácil","Dashboard"])
     
-    if pagina == "Principal":
+    if pagina == "Chamados Pixeon":
         # Carregar dados completos (não filtrados)
         df_completo = carregar_chamados()
         
