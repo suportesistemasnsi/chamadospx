@@ -226,4 +226,5 @@ def main():
         dashboard()
 
 if __name__ == "__main__":
-    main()
+    app = pagina_facil()
+    app.mainloop()
