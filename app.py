@@ -508,12 +508,12 @@ def main():
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    chamado_sh = st.text_input("Chamado SH", value="",placeholder="Nº do chamado Service Desk")
+                    chamado_sh = st.text_input("Chamado SH", value="", placeholder="Nº do chamado Service Desk")
                     titulo = st.text_input("Título*", placeholder="Descrição do chamado")
                     data_abertura = st.date_input("Data de Abertura*")
                 
                 with col2:
-                    chamado_px = st.text_input("Chamado Pixeon", value="",placeholder="Nº do chamado Pixeon")
+                    chamado_px = st.text_input("Chamado Pixeon", value="", placeholder="Nº do chamado Pixeon")
                     pendencia = st.selectbox("Pendência*", ["Pixeon", "SH"])
                 
                 with col3:
