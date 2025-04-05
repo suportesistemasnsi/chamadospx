@@ -509,7 +509,7 @@ def main():
                 
                 with col1:
                     chamado_sh = st.text_input("Chamado SH", value="", placeholder="Nº do chamado Service Desk")
-                    titulo = st.text_input("Título*", placeholder="Descrição do chamado")
+                    titulo = st.text_input("Título*", placeholder="Digite o Título")
                     data_abertura = st.date_input("Data de Abertura*")
                 
                 with col2:
