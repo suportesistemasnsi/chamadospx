@@ -508,16 +508,16 @@ def main():
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    chamado_sh = st.number_input("Chamado SH", min_value=0, step=1)
+                    chamado_sh = st.text_input("Chamado SH", value="",placeholder="Nº do chamado Service Desk")
                     titulo = st.text_input("Título*", placeholder="Descrição do chamado")
                     data_abertura = st.date_input("Data de Abertura*")
                 
                 with col2:
-                    chamado_px = st.text_input("Chamado Pixeon", value="")
+                    chamado_px = st.text_input("Chamado Pixeon", value="",placeholder="Nº do chamado Pixeon")
                     pendencia = st.selectbox("Pendência*", ["Pixeon", "SH"])
                 
                 with col3:
-                    usuario_resp = st.text_input("Usuário Responsável*")
+                    usuario_resp = st.text_input("Usuário Responsável*", placeholder="Nome do reponsável")
                     status = st.selectbox("Status*", ["Aberto", "Concluído"])
                     observacao = st.text_area("Observações")
 
