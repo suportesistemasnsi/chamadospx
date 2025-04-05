@@ -12,7 +12,6 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 from services.supabase import supabase
-from facil import pagina_facil
 import time
 from streamlit_cookies_manager import EncryptedCookieManager
 
@@ -641,6 +640,7 @@ def main():
         else:
             st.warning("Nenhum chamado encontrado com os filtros atuais.")
     elif pagina == "Chamados Fácil":
+        from facil import pagina_facil
         pagina_facil()
     
     elif pagina == "Dashboard":
