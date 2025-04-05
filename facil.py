@@ -189,7 +189,7 @@ def pagina_facil():
                         changes.append({
                             "id": original_row["ID"],
                             "data": {
-                                "chamado_sd": row["Chamados SH"],
+                                "chamado_sd": row["Chamados Nordeste"],
                                 "chamado_facil": row["Chamados Fácil"],
                                 "titulo": row["Título"],
                                 "data_abertura": data_abertura,
