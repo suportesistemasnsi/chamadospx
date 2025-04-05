@@ -470,7 +470,7 @@ def main():
     # Verificar autenticação antes de exibir o conteúdo
     verificar_autenticacao()
     st.sidebar.header("Navegação", divider="blue")
-    pagina = st.sidebar.radio("Escolha uma página:", ["Principal", "Dashboard"])
+    pagina = st.sidebar.radio("Escolha uma página:", ["Chamados Pixeon","Chamados Fácil","Dashboard"])
     
     if pagina == "Principal":
         # Carregar dados completos (não filtrados)
