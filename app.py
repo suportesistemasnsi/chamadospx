@@ -12,6 +12,7 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 from services.supabase import supabase
+from pages.facil import pagina_facil  # Se o arquivo estiver na pasta "pages"
 import time
 from streamlit_cookies_manager import EncryptedCookieManager
 
