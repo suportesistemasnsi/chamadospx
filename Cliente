@@ -1,11 +1,103 @@
+from datetime import datetime
+
 class Cliente:
-    def __init__(self, id, chsh, chpx, titulo, data, pend, usr, status, obs):
+    def __init__(self, id, chsh, chpx, titulo, data, pend, usr, status, obs, tabela=None):
+        """
+        Classe para representar um cliente ou chamado.
+
+        Args:
+            id (int): ID do chamado.
+            chsh (int): Número do chamado SH.
+            chpx (str): Número do chamado PX ou Fácil.
+            titulo (str): Título do chamado.
+            data (str ou datetime): Data de abertura do chamado.
+            pend (str): Pendência (ex.: "SH", "Fácil").
+            usr (str): Usuário responsável.
+            status (str): Status do chamado (ex.: "Aberto", "Concluído").
+            obs (str): Observação do chamado.
+            tabela (str, opcional): Nome da tabela de origem (ex.: "Chamados", "Chamados_fc").
+        """
+        if status not in ["Aberto", "Concluído"]:
+            raise ValueError("O status deve ser 'Aberto' ou 'Concluído'.")
+        
+        try:
+            self.data = datetime.strptime(data, "%Y-%m-%d") if isinstance(data, str) else data
+        except ValueError:
+            raise ValueError("A data deve estar no formato 'YYYY-MM-DD'.")
+
         self.id = id
         self.chsh = chsh
         self.chpx = chpx
         self.titulo = titulo
-        self.data = data
         self.pend = pend
         self.usr = usr
         self.status = status
-        self.obs = obs  # Argumento obrigatório
+        self.obs = obs
+        self.tabela = tabela  # Indica a origem dos dados (opcional)
+
+    def to_dict(self):
+        """
+        Converte o objeto Cliente em um dicionário.
+
+        Returns:
+            dict: Representação do objeto como dicionário.
+        """
+        return {
+            "id": self.id,
+            "chsh": self.chsh,
+            "chpx": self.chpx,
+            "titulo": self.titulo,
+            "data": self.data.strftime("%Y-%m-%d") if isinstance(self.data, datetime) else self.data,
+            "pend": self.pend,
+            "usr": self.usr,
+            "status": self.status,
+            "obs": self.obs,
+            "tabela": self.tabela,
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        """
+        Cria um objeto Cliente a partir de um dicionário.
+
+        Args:
+            data (dict): Dicionário contendo os dados do cliente.
+
+        Returns:
+            Cliente: Objeto Cliente criado a partir do dicionário.
+        """
+        return cls(
+            id=data.get("id"),
+            chsh=data.get("chsh"),
+            chpx=data.get("chpx"),
+            titulo=data.get("titulo"),
+            data=data.get("data"),
+            pend=data.get("pend"),
+            usr=data.get("usr"),
+            status=data.get("status"),
+            obs=data.get("obs"),
+            tabela=data.get("tabela"),
+        )
+
+    def atualizar(self, **kwargs):
+        """
+        Atualiza os atributos do objeto Cliente com base nos argumentos fornecidos.
+
+        Args:
+            **kwargs: Atributos a serem atualizados.
+        """
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+
+    def __repr__(self):
+        """
+        Representação legível do objeto Cliente.
+
+        Returns:
+            str: Representação do objeto.
+        """
+        return (
+            f"Cliente(id={self.id}, chsh={self.chsh}, chpx={self.chpx}, titulo={self.titulo}, "
+            f"data={self.data}, pend={self.pend}, usr={self.usr}, status={self.status}, obs={self.obs}, tabela={self.tabela})"
+        )
